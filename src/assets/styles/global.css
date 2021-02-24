@@ -103,12 +103,12 @@ body {
   list-style-type: none;
   background-color: rgb(230, 230, 230);
 }
-ul li:first-child {
+ul.jobsUl li:first-child {
   list-style-type: none;
   border-bottom: 1px solid black;
   border-top: none;
 }
-ul li:last-child {
+ul.jobsUl li:last-child {
   list-style-type: none;
   border-top: 1px solid black;
   border-bottom: none;

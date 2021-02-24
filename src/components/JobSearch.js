@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { storeJobSearch, detailedJob } from '../actions/allActions'
 import { Divider } from './Styles' // import styled-component
-import { Button } from 'react-bootstrap' // import styled-component
+import { Button } from 'react-bootstrap'
 import ShowAllJobs from './ShowAllJobs'
 import ShowDetailedJob from './ShowDetailedJob'
 import { countries, us } from '../data/countries'

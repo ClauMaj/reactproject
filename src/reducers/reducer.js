@@ -1,4 +1,4 @@
-
+import { v1 as uuidv1 } from "uuid";
 
 // gets called by actions
 // reducer returns a new global state
@@ -30,9 +30,14 @@ const reducer = (state, action) => {
                 tempJobForm: action.data,
             }
         case "SAVEJOB":
+            let newJob = {
+                id: uuidv1(),
+                ...action.data,
+                isEdit: false,
+            }
             return {
                 ...state,
-                savedJobs: [...state.savedJobs, action.data],
+                savedJobs: [...state.savedJobs, newJob],
             }
         default:
             return state;

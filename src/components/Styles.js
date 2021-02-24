@@ -48,3 +48,18 @@ export const Divider = styled.div`
   margin-left: -3px;
   top: 0;
 `;
+
+export const H1JobsDiv = styled.div`
+
+ box-shadow: 0px 15px 10px -15px black;
+`;
+
+export const JobLi = styled.li`
+font-size: 1.5rem;
+list-style-type: none;
+margin-bottom:7px;
+:hover {
+  list-style-type: none;
+  background-color: rgb(230, 230, 230);
+}
+`;

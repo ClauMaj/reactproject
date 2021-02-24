@@ -2,8 +2,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startAddJobForm } from '../actions/allActions'
-import { Button } from 'react-bootstrap' // import styled-component
+import { Button } from 'react-bootstrap'
+import { H1JobsDiv } from './Styles' // import styled-component
 import JobForm from './JobForm'
+import ManagedJobs from './ManagedJobs'
 
 const JobManager = () => {
     // getting global state
@@ -35,11 +37,13 @@ const JobManager = () => {
                 </div>)}
             {/* end show button/form ternary */}
 
-            <div className="row px-0 mx-0">
-                <div className="col-10 offset-1">
-                    <h1>Current jobs</h1>
-                    <ul>
-
+            <div className="row mt-5 px-0 mx-0">
+                <div className="col-10 flex-column offset-1 d-flex align-items-center justify-content-center">
+                    <H1JobsDiv>
+                        <h1 >Currently managed jobs</h1>
+                    </H1JobsDiv>
+                    <ul className="my-4">
+                        <ManagedJobs />
                     </ul>
                 </div>
             </div>
