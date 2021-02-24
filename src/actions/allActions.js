@@ -14,4 +14,9 @@ export const detailedJob = (id) => {
     }
 }
 
+
+
+
+
+
 // exporting individual fnct. When importing link use the name of the action
