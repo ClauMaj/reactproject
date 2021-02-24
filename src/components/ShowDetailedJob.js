@@ -1,13 +1,48 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'  // acces to global state
+import ReactHtmlParser from 'react-html-parser';
 
 class ShowDetailedJob extends Component {
     render() {
         return (
             <>
+                <div >
+                    <h3 className="pt-4 h3Details" >{this.props.detailedJob.name}</h3>
+                    <div className="mt-3 w-100 d-flex justify-content-between flex-row"><h4>@{this.props.detailedJob.company.name} </h4><h4>level: {this.props.detailedJob.levels.map((el) => {
+                        return el.short_name
+                    }).join('/')}</h4> </div>
 
+                    <div className="mb-2 w-100 d-flex justify-content-between flex-row"><h5>{this.props.detailedJob.locations.map((el) => {
+                        return el.name
+                    }).join('/')}</h5> <h5 className="h6Date"> {this.props.detailedJob.publication_date.slice(0, 10)}</h5></div>
+                    <p></p>{ReactHtmlParser(this.props.detailedJob.contents)}
+                    <a href={this.props.detailedJob.refs.landing_page} target="_blank">{this.props.detailedJob.refs.landing_page}</a>
+                </div>
             </>
         )
     }
 }
 
-export default ShowDetailedJob
+
+// map global state to a prop
+// counter is our props: this.state.props
+const mapStateToProps = (state) => {
+    return {
+        detailedJob: state.detailedJob
+    }
+}
+
+// update functions for state
+// increment is a prop: this.props.increment(n)
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         increment: (n) => dispatch(increment(n))  // callback accepts param and passes it to dispatch
+//     }
+// }
+
+
+
+// connect takes 2 functions 
+// 1st: for pulling down state
+// 2nd: for updating state
+export default connect(mapStateToProps, null)(ShowDetailedJob)

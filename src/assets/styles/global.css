@@ -46,15 +46,6 @@ body {
   font-weight: bold;
 }
 
-.jobsDiv {
-  height: 70vh;
-}
-
-.jobsContainer {
-  border: 1px solid darkgray;
-  background-color: lightgray;
-}
-
 .form-group {
   position: relative;
   padding: 10px;
@@ -94,4 +85,61 @@ body {
 .form-select {
   max-width: 100%;
   height: 35px;
+}
+
+.jobsLi {
+  list-style-type: none;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.jobsLi:hover {
+  list-style-type: none;
+  background-color: rgb(230, 230, 230);
+}
+ul li:first-child {
+  list-style-type: none;
+  border-bottom: 1px solid black;
+  border-top: none;
+}
+ul li:last-child {
+  list-style-type: none;
+  border-top: 1px solid black;
+  border-bottom: none;
+  padding-bottom: 20px;
+}
+
+.jobsDiv {
+  max-height: 75vh;
+  /* overflow: hidden; */
+}
+
+.jobsContainer {
+  max-height: 75vh;
+  background-color: lightgray;
+}
+
+.oneJobDetails {
+  max-height: 78vh;
+  background-color: lightgray;
+  overflow-y: auto;
+}
+.jobsUl {
+  max-height: 75vh;
+  background-color: lightgray;
+  overflow-y: auto;
+}
+
+.h5Li {
+  cursor: pointer;
+  color: #ff4e2e;
+}
+.h3Details {
+  color: #ff4e2e;
+}
+.h6Date {
+  white-space: nowrap;
+}
+.totalP {
+  color: rgb(26, 120, 163);
+  border-bottom: 1px solid rgb(26, 120, 163);
 }

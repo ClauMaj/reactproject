@@ -1,16 +1,16 @@
 
 // an action creator, return an object with TYPE and data
-export const userCity = (n) => {
+export const storeJobSearch = (data) => {
     return {
-        type: "USERCITY",
-        data: n
+        type: "STOREJOBSEARCH",
+        data: data
     }
 }
 
-export const jobsData = (n) => {
+export const detailedJob = (id) => {
     return {
-        type: "JOBSDATA",
-        data: n
+        type: "DETAILEDJOB",
+        data: id
     }
 }
 

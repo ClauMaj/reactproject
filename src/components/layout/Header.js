@@ -10,7 +10,7 @@ import { H1S } from '../Styles' // import styled-component
 const Header = (props) => {
     return (
         <>
-            <Navbar className="py-0 navBgc" collapseOnSelect expand="lg" variant="dark">
+            <Navbar fixed="top" className="py-0 navBgc" collapseOnSelect expand="lg" variant="dark">
                 <Navbar.Brand ><Link to="/"><img src={Logo} alt="logo" /></Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">

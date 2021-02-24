@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'  // acces to global state
-import { userCity } from '../actions/allActions' // import unnamed function
+import { storeJobSearch } from '../actions/allActions' // import unnamed function
 
 class Classes extends Component {
   render() {
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => {
 // increment is a prop: this.props.increment(n)
 const mapDispatchToProps = (dispatch) => {
   return {
-    increment: (n) => dispatch(userCity(n))  // callback accepts param and passes it to dispatch
+    increment: (n) => dispatch(storeJobSearch(n))  // callback accepts param and passes it to dispatch
   }
 }
 

@@ -19,6 +19,7 @@ export const H1S = styled.h1`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 5vh;
 
 `;
 
