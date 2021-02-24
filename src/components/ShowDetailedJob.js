@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'  // acces to global state
 import ReactHtmlParser from 'react-html-parser';
+import { Link } from "react-router-dom";
+import { Button } from 'react-bootstrap' // import styled-component
+import { tempJobForm, startAddJobForm } from '../actions/allActions'
 
 class ShowDetailedJob extends Component {
     render() {
@@ -17,6 +20,27 @@ class ShowDetailedJob extends Component {
                     }).join('/')}</h5> <h5 className="h6Date"> {this.props.detailedJob.publication_date.slice(0, 10)}</h5></div>
                     <p></p>{ReactHtmlParser(this.props.detailedJob.contents)}
                     <a href={this.props.detailedJob.refs.landing_page} target="_blank">{this.props.detailedJob.refs.landing_page}</a>
+                    <div className="my-5 w-100 d-flex justify-content-center align-items-center">
+                        <Link to="/jobmanager" className=' mx-5'><Button className='buttonApp' variant="primary" onClick={() => {
+                            this.props.setDetailedToTemp({
+                                jobTitle: this.props.detailedJob.name,
+                                company: this.props.detailedJob.company.name,
+                                location: this.props.detailedJob.locations.map((el) => {
+                                    return el.name
+                                }).join('/'),
+                                date: new Date(),
+                                active: true,
+                                rejected: false,
+                                interview: false,
+                                link: this.props.detailedJob.refs.landing_page,
+                                from: "The Muse",
+                                notes: "",
+                            });
+                            this.props.toggleForm();
+                        }
+                        }>Add to my jobs</Button></Link>
+                    </div>
+
                 </div>
             </>
         )
@@ -34,15 +58,16 @@ const mapStateToProps = (state) => {
 
 // update functions for state
 // increment is a prop: this.props.increment(n)
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         increment: (n) => dispatch(increment(n))  // callback accepts param and passes it to dispatch
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setDetailedToTemp: (n) => dispatch(tempJobForm(n)),  // callback accepts param and passes it to dispatch
+        toggleForm: () => dispatch(startAddJobForm())
+    }
+}
 
 
 
 // connect takes 2 functions 
 // 1st: for pulling down state
 // 2nd: for updating state
-export default connect(mapStateToProps, null)(ShowDetailedJob)
+export default connect(mapStateToProps, mapDispatchToProps)(ShowDetailedJob)

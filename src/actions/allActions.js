@@ -14,6 +14,27 @@ export const detailedJob = (id) => {
     }
 }
 
+export const startAddJobForm = () => {
+    return {
+        type: "STARTADDJOBFORM",
+    }
+}
+
+export const tempJobForm = (data) => {
+    return {
+        type: "TEMPJOBFORM",
+        data: data,
+    }
+}
+
+export const saveJob = (data) => {
+    return {
+        type: "SAVEJOB",
+        data: data,
+    }
+}
+
+
 
 
 

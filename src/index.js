@@ -10,12 +10,14 @@ import { createStore } from 'redux' //Redux.createStore()
 import { Provider } from 'react-redux' // makes available the state by wraping all components
 import "bootstrap/dist/css/bootstrap.min.css"; // import bootstrap link
 import "./assets/styles/global.css";  // import custom css
+import DatePicker from "react-datepicker";
 
 
 
 
 // save state to local storage (convert to string and save)
 const saveToLocalStorage = (reduxGlobalState) => {
+  console.log(reduxGlobalState);
   try {
     const serializeState = JSON.stringify(reduxGlobalState);
     localStorage.setItem('state', serializeState)
@@ -30,7 +32,25 @@ const saveToLocalStorage = (reduxGlobalState) => {
 const loadFromLocalStorage = () => {
   const serializeState = localStorage.getItem('state');
   if (serializeState === null) {
-    return { searchedJobs: { results: [] }, remainingPages: 0, detailedJob: undefined }
+    return {
+      searchedJobs: { results: [] },
+      remainingPages: 0,
+      detailedJob: undefined,
+      startAddJobForm: false,
+      tempJobForm: {
+        jobTitle: "",
+        company: "",
+        location: "",
+        date: new Date(),
+        active: true,
+        rejected: false,
+        interview: false,
+        link: "",
+        from: "",
+        notes: "",
+      },
+      savedJobs: [],
+    }
   }
   else {
     return JSON.parse(serializeState) // JS object

@@ -15,7 +15,7 @@ const App = () => {
           <HomeH1>JS Manager is an app where developers can search for coding jobs and manage their job search!</HomeH1>
           <ButtonDiv>
             <Link to="/jobsearch" className=' mx-5'><Button className='buttonApp' variant="primary" size="lg">Job Search</Button></Link>
-            <Link className=' mx-5'><Button className='buttonApp' variant="primary" size="lg">Manage your applied jobs</Button></Link>
+            <Link to="/jobmanager" className=' mx-5'><Button className='buttonApp' variant="primary" size="lg">Manage your applied jobs</Button></Link>
           </ButtonDiv>
         </div>
       </div>

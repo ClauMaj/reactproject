@@ -19,6 +19,21 @@ const reducer = (state, action) => {
                 ...state,
                 detailedJob: oneJob[0],
             }
+        case "STARTADDJOBFORM":
+            return {
+                ...state,
+                startAddJobForm: !state.startAddJobForm,
+            }
+        case "TEMPJOBFORM":
+            return {
+                ...state,
+                tempJobForm: action.data,
+            }
+        case "SAVEJOB":
+            return {
+                ...state,
+                savedJobs: [...state.savedJobs, action.data],
+            }
         default:
             return state;
     }

@@ -75,7 +75,7 @@ const JobSearch = () => {
             <form onSubmit={handleSearch} className="d-flex align-items-center justify-content-center flex-row">
               <div className="form-group">
                 <label>City</label>
-                <input type="text" className="form-control input-lg" onChange={(e) => { setPickedCity(e.target.value) }} />
+                <input type="text" placeholder="City..." className="form-control input-lg" onChange={(e) => { setPickedCity(e.target.value) }} />
               </div>
               {/* end input field */}
               <div className="form-group-select">
