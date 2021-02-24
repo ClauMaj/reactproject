@@ -17,7 +17,7 @@ const Header = (props) => {
                     <Nav className="ml-auto pr-3">
                         <Link className="navLink mx-3" to="/">Home</Link>
                         <Link className="navLink mx-3" to="/jobsearch">Job Search</Link>
-                        <Link className="navLink mx-3" to="/classes">Classes</Link>
+                        <Link className="navLink mx-3" to="/jobmanager">My jobs</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

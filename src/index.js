@@ -2,7 +2,7 @@ import React from "react";    // import react
 import ReactDOM from "react-dom";  // import react-dom
 import App from "./App";  // component
 import JobSearch from "./components/JobSearch";  // component
-import Classes from "./components/Classes";  // component
+import JobManager from "./components/JobManager";  // component
 import BaseLayout from './components/layout/BaseLayout'; // import the BaseLayout component(covers all pages)
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom' // routers and switches for the render
 import reducer from "./reducers/reducer";  // import the reducer
@@ -57,7 +57,7 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={App} />
             <Route path="/jobsearch" component={JobSearch} />
-            <Route path="/classes" component={Classes} />
+            <Route path="/jobmanager" component={JobManager} />
           </Switch>
         </BaseLayout>
       </Router>
