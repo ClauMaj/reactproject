@@ -22,10 +22,9 @@ library.add(faCheckSquare, faTrash, faPencilAlt, faStar, faEdit, faSave)
 
 // save state to local storage (convert to string and save)
 const saveToLocalStorage = (reduxGlobalState) => {
-  // let saveState = {...reduxGlobalState, searchedJobs:{}}
-  // console.log(reduxGlobalState);
+  let saveState = { savedJobs: [...reduxGlobalState.savedJobs] }
   try {
-    const serializeState = JSON.stringify(reduxGlobalState);
+    const serializeState = JSON.stringify(saveState);
     localStorage.setItem('state', serializeState)
   }
   catch (e) {
@@ -71,7 +70,37 @@ const loadFromLocalStorage = () => {
     }
   }
   else {
-    return JSON.parse(serializeState) // JS object
+    return {
+      searchedJobs: { results: [] },
+      remainingPages: 0,
+      detailedJob: undefined,
+      startAddJobForm: false,
+      savedJobs: JSON.parse(serializeState).savedJobs, // JS object
+      tempJobForm: {
+        jobTitle: "",
+        company: "",
+        location: "",
+        date: new Date(),
+        active: true,
+        rejected: false,
+        interview: false,
+        link: "",
+        from: "",
+        notes: "",
+      },
+      setJobToEdit: {
+        jobTitle: "",
+        company: "",
+        location: "",
+        date: new Date(),
+        active: true,
+        rejected: false,
+        interview: false,
+        link: "",
+        from: "",
+        notes: "",
+      },
+    }
   }
 }
 

@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { storeJobSearch, detailedJob } from '../actions/allActions'
-import { Divider } from './Styles' // import styled-component
+import { Divider, H1JobsDiv } from './Styles' // import styled-component
 import { Button } from 'react-bootstrap'
 import ShowAllJobs from './ShowAllJobs'
 import ShowDetailedJob from './ShowDetailedJob'
@@ -13,6 +13,8 @@ const JobSearch = () => {
   const jobsInState = useSelector(state => state.searchedJobs.results)
   const stateDetailedJob = useSelector(state => state.detailedJob)
   const nrOfJobs = useSelector(state => state.searchedJobs.total)
+  const pageCount = useSelector(state => state.searchedJobs.page_count)
+  const currentPage = useSelector(state => state.searchedJobs.page)
   console.log(jobsInState);
 
   // receive dispatch functions
@@ -23,6 +25,7 @@ const JobSearch = () => {
   const [pickedCountry, setPickedCountry] = useState('GA');
   const [checkEntry, setCheckEntry] = useState(false);
   const [checkMid, setCheckMid] = useState(false);
+  let pageNumber = 1;
 
 
   const handleSearch = (e) => {
@@ -40,20 +43,19 @@ const JobSearch = () => {
     const getJobs = async (searchForCity, pickedCountry, checkEntry, checkMid) => {
       let jobsUrl = "";
       if ((checkEntry === true) && (checkMid === false)) {
-        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Entry%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=1`;
+        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Entry%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=${pageNumber}`;
       }
       else if ((checkEntry === false) && (checkMid === true)) {
-        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Mid%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=1`;
+        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Mid%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=${pageNumber}`;
       }
       else {
-        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Entry%20Level&level=Mid%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=1`;
+        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Entry%20Level&level=Mid%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=${pageNumber}`;
       }
       console.log(jobsUrl);
       const reponse = await fetch(jobsUrl);
       const jobsAPIData = await reponse.json();
       console.log(jobsAPIData);
       dispatch(storeJobSearch(jobsAPIData))
-      // dispatch(detailedJob(jobsAPIData.results[0].id))
     };
 
   }
@@ -71,7 +73,9 @@ const JobSearch = () => {
     <>
       <div className="row bbDiv mb-3 mx-0 d-flex justify-content-center align-items-center">
         <div className="col-10 ">
-          <h2>Search for Developer Jobs!</h2>
+          <H1JobsDiv className="my-4">
+            <h2>Search for Developer Jobs!</h2>
+          </H1JobsDiv>
           <div>
             <form onSubmit={handleSearch} className="d-flex align-items-center justify-content-center flex-row">
               <div className="form-group">
@@ -120,6 +124,17 @@ const JobSearch = () => {
           <ul className="px-0 my-0  jobsUl">
             {(jobsInState.length > 0) ? <ShowAllJobs jobsInState={jobsInState} /> : ""}
           </ul>
+          {(pageCount - currentPage) > 0 ?
+            <div>
+              <Button className="buttonApp mt-1 mb-5" onClick={(e) => {
+                pageNumber++;
+                handleSearch(e);
+              }
+              }>Load more jobs</Button>
+            </div>
+            :
+            ''
+          }
         </div>
         {/* end jobs col */}
 

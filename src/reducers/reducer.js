@@ -6,9 +6,11 @@ import { v1 as uuidv1 } from "uuid";
 const reducer = (state, action) => {
     switch (action.type) {
         case "STOREJOBSEARCH":
+            let tempResults = state.searchedJobs.results;
             return {
                 ...state,
-                searchedJobs: action.data,
+                searchedJobs: { ...action.data, results: [...tempResults, ...action.data.results] },
+
                 remainingPages: action.data.page_count - action.data.page,
             }
         case "DETAILEDJOB":
