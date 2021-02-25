@@ -23,10 +23,10 @@ const ManagedJobs = () => {
         <>
             <TitleLi key={0}>
                 <div className="row mx-0 mt-4">
-                    <div className="col-5"> <b> Job title</b></div>
-                    <div className="col-2"><b>Company</b></div>
-                    <div className="col-2"><b>Location</b></div>
-                    <div className="col-1"><b>Applied</b></div>
+                    <div className="col-5"> <b> Job title &#8645;</b></div>
+                    <div className="col-2"><b>Company &#8645;</b></div>
+                    <div className="col-2"><b>Location &#8645;</b></div>
+                    <div className="col-1"><b>Applied &#8645;</b></div>
                     <div className="col-1 d-flex align-items-center justify-content-center"><b>Status</b></div>
                     <div className="col-1 d-flex align-items-center justify-content-center"><b>Edit</b></div>
                 </div>

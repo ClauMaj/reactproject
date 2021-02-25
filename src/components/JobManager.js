@@ -40,12 +40,12 @@ const JobManager = () => {
 
             <div className="row mt-5 px-0 mx-0">
                 <div className="col-10 flex-column px-0 offset-1 d-flex align-items-center justify-content-center">
-                    <H1JobsDiv>
+                    <H1JobsDiv >
                         <h1 >Currently managed jobs</h1>
                     </H1JobsDiv>
-                    <ul className="my-4 w-100 px-0">
+                    <ol className="my-4 w-100 px-0" start="0">
                         <ManagedJobs />
-                    </ul>
+                    </ol>
                 </div>
             </div>
 

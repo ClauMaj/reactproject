@@ -17,7 +17,8 @@ import DatePicker from "react-datepicker";
 
 // save state to local storage (convert to string and save)
 const saveToLocalStorage = (reduxGlobalState) => {
-  console.log(reduxGlobalState);
+  // let saveState = {...reduxGlobalState, searchedJobs:{}}
+  // console.log(reduxGlobalState);
   try {
     const serializeState = JSON.stringify(reduxGlobalState);
     localStorage.setItem('state', serializeState)
