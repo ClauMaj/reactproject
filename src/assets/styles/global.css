@@ -171,3 +171,20 @@ ul.jobsUl li:last-child {
 .statusImage {
   height: 1rem;
 }
+
+.deleteEdit {
+  background-color: #d3d3d3;
+  border: none;
+}
+.deleteEdit:hover {
+  background-color: #6e6e6e;
+  border: none;
+}
+.deleteEdit:focus {
+  background-color: #d3d3d3;
+  border: none;
+}
+
+.modalBgc {
+  background-color: rgb(100, 149, 172);
+}

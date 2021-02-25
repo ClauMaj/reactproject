@@ -41,6 +41,26 @@ export const showDetails = (id) => {
     }
 }
 
+export const deleteSavedJob = (id) => {
+    return {
+        type: "DELETESAVEDJOB",
+        data: id,
+    }
+}
+
+export const setJobToEdit = (data) => {
+    return {
+        type: "SETJOBTOEDIT",
+        data: data,
+    }
+}
+export const saveEditedJob = (data) => {
+    return {
+        type: "SAVEEDITEDJOB",
+        data: data,
+    }
+}
+
 
 
 // exporting individual fnct. When importing link use the name of the action

@@ -2,17 +2,23 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { JobLi, TitleLi } from './Styles' // import styled-component
-import { showDetails } from '../actions/allActions'
+import { showDetails, deleteSavedJob, setJobToEdit } from '../actions/allActions'
 import { Link } from "react-router-dom";
 import Green from '../assets/images/green.png'
 import Orange from '../assets/images/orange.png'
 import Red from '../assets/images/red.png'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, Modal } from 'react-bootstrap'
+import JobForm from './JobForm'
+import EditJob from './EditJob'
 
 const ManagedJobs = () => {
     // getting global state
     const managedJobs = useSelector(state => state.savedJobs)
 
+
+    // local state for modal
+    const [modalShow, setModalShow] = useState(false);
 
     // receive dispatch functions
     const dispatch = useDispatch()
@@ -52,6 +58,35 @@ const ManagedJobs = () => {
                         <div className="col-2">{job.location}</div>
                         <div className="col-1">{Math.round(Math.abs((jobDate - currentDate) / oneDay))} days ago</div>
                         <div className="col-1 d-flex align-items-center justify-content-center"><img className="statusImage" src={status} alt="" /></div>
+                        <div className="showBtn col-1 d-flex align-items-center justify-content-end">
+
+                            <Button className="deleteEdit" onClick={() => {
+                                dispatch(setJobToEdit({
+                                    id: job.id,
+                                    jobTitle: job.jobTitle,
+                                    company: job.company,
+                                    location: job.location,
+                                    date: job.date,
+                                    active: job.active,
+                                    rejected: job.rejected,
+                                    interview: job.interview,
+                                    link: job.link,
+                                    from: job.from,
+                                    notes: job.notes,
+                                }));
+                                setModalShow(true);
+                            }}>
+                                <FontAwesomeIcon icon={["fas", "edit"]} color="orange" />
+                            </Button>
+                            <Button className="deleteEdit" onClick={() => {
+                                dispatch(deleteSavedJob(job.id))
+                            }
+                            }>
+                                <FontAwesomeIcon icon={["fas", "trash"]} color="darkred" />
+                            </Button>
+
+
+                        </div>
                     </div>
                     {job.showDetails ?
                         <div className="row mx-0">
@@ -67,6 +102,24 @@ const ManagedJobs = () => {
                 </JobLi>)
             })}
 
+            <Modal
+                show={modalShow}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header className="modalBgc" closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Edit job entry:
+        </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="modalBgc">
+                    <EditJob setModalShow={setModalShow} />
+                </Modal.Body>
+                <Modal.Footer className="modalBgc">
+                    <Button onClick={() => setModalShow(false)}>Close</Button>
+                </Modal.Footer>
+            </Modal>
         </>
     )
 }

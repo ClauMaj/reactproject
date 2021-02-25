@@ -48,11 +48,12 @@ const JobSearch = () => {
       else {
         jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Entry%20Level&level=Mid%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=1`;
       }
+      console.log(jobsUrl);
       const reponse = await fetch(jobsUrl);
       const jobsAPIData = await reponse.json();
       console.log(jobsAPIData);
       dispatch(storeJobSearch(jobsAPIData))
-      dispatch(detailedJob(jobsAPIData.results[0].id))
+      // dispatch(detailedJob(jobsAPIData.results[0].id))
     };
 
   }

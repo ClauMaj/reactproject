@@ -67,6 +67,7 @@ font-weight: 400;
   /* list-style-type: none; */
   background-color: rgb(230, 230, 230);
 }
+
 `;
 
 export const TitleLi = styled.li`
@@ -75,4 +76,19 @@ width: 100%;
 font-size: 1.3rem;
 list-style-type: none;
 margin-bottom:15px;
+`;
+
+export const OLHover = styled.ol`
+li {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+  li:hover{
+      background-color: rgb(151, 151, 151);
+      padding: 3px 0px 3px 0px;
+  }
+  li:hover .deleteEdit {
+      display: inline-block;
+  }
+
 `;

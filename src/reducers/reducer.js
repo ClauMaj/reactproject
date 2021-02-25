@@ -48,6 +48,31 @@ const reducer = (state, action) => {
                 ...state,
                 savedJobs: showDetailsForJob
             }
+        case "DELETESAVEDJOB":
+            let deleteJob = state.savedJobs.filter((job) => {
+                return job.id !== action.data;
+            });
+            return {
+                ...state,
+                savedJobs: deleteJob
+            }
+        case "SETJOBTOEDIT":
+            // let setJobToEdit = state.savedJobs.filter((job) => {
+            //     return job.id === action.data.id;
+            // });
+            // console.log(setJobToEdit);
+            return {
+                ...state,
+                setJobToEdit: { ...action.data },
+            }
+        case "SAVEEDITEDJOB":
+            let saveEditedJob = state.savedJobs.map((job) => {
+                return job.id === action.data.id ? { ...job, jobTitle: action.data.jobTitle, company: action.data.company, location: action.data.location, date: action.data.date, active: action.data.active, rejected: action.data.rejected, interview: action.data.interview, link: action.data.link, from: action.data.from, notes: action.data.notes } : job;
+            });
+            return {
+                ...state,
+                savedJobs: saveEditedJob
+            }
         default:
             return state;
     }
