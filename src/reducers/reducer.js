@@ -34,10 +34,19 @@ const reducer = (state, action) => {
                 id: uuidv1(),
                 ...action.data,
                 isEdit: false,
+                showDetails: false,
             }
             return {
                 ...state,
                 savedJobs: [...state.savedJobs, newJob],
+            }
+        case "SHOWDETAILS":
+            let showDetailsForJob = state.savedJobs.map((job) => {
+                return job.id === action.data ? { ...job, showDetails: !job.showDetails } : job;
+            });
+            return {
+                ...state,
+                savedJobs: showDetailsForJob
             }
         default:
             return state;

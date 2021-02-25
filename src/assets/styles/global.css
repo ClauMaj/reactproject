@@ -167,3 +167,7 @@ ul.jobsUl li:last-child {
   height: 75%;
   white-space: nowrap;
 }
+
+.statusImage {
+  height: 1rem;
+}

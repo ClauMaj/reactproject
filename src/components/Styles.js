@@ -55,11 +55,23 @@ export const H1JobsDiv = styled.div`
 `;
 
 export const JobLi = styled.li`
-font-size: 1.5rem;
+cursor: pointer;
+width: 100%;
+background-color: #D3D3D3;
+font-size: 1.2rem;
 list-style-type: none;
-margin-bottom:7px;
+margin-bottom:4px;
+border-radius: 5px;
+font-weight: 400;
 :hover {
   list-style-type: none;
   background-color: rgb(230, 230, 230);
 }
+`;
+export const TitleLi = styled.li`
+background-color: rgb(26, 120, 163);
+width: 100%;
+font-size: 1.4rem;
+list-style-type: none;
+margin-bottom:15px;
 `;

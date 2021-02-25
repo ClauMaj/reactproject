@@ -34,9 +34,12 @@ export const saveJob = (data) => {
     }
 }
 
-
-
-
+export const showDetails = (id) => {
+    return {
+        type: "SHOWDETAILS",
+        data: id,
+    }
+}
 
 
 

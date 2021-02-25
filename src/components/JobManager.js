@@ -7,6 +7,7 @@ import { H1JobsDiv } from './Styles' // import styled-component
 import JobForm from './JobForm'
 import ManagedJobs from './ManagedJobs'
 
+
 const JobManager = () => {
     // getting global state
     const jobsInState = useSelector(state => state.searchedJobs.results)
@@ -38,11 +39,11 @@ const JobManager = () => {
             {/* end show button/form ternary */}
 
             <div className="row mt-5 px-0 mx-0">
-                <div className="col-10 flex-column offset-1 d-flex align-items-center justify-content-center">
+                <div className="col-10 flex-column px-0 offset-1 d-flex align-items-center justify-content-center">
                     <H1JobsDiv>
                         <h1 >Currently managed jobs</h1>
                     </H1JobsDiv>
-                    <ul className="my-4">
+                    <ul className="my-4 w-100 px-0">
                         <ManagedJobs />
                     </ul>
                 </div>
