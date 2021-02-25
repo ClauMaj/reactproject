@@ -10,13 +10,12 @@ import { createStore } from 'redux' //Redux.createStore()
 import { Provider } from 'react-redux' // makes available the state by wraping all components
 import "bootstrap/dist/css/bootstrap.min.css"; // import bootstrap link
 import "./assets/styles/global.css";  // import custom css
-import DatePicker from "react-datepicker";
 
 // font-awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheckSquare, faTrash, faPencilAlt, faStar, faEdit, faSave } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faCheckSquare, faTrash, faPencilAlt, faStar, faEdit, faSave)
+library.add(faTrash, faEdit)
 
 
 

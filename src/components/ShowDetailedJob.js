@@ -18,7 +18,7 @@ class ShowDetailedJob extends Component {
                     <div className="mb-2 w-100 d-flex justify-content-between flex-row"><h5>{this.props.detailedJob.locations.map((el) => {
                         return el.name
                     }).join('/')}</h5> <h5 className="h6Date"> {this.props.detailedJob.publication_date.slice(0, 10)}</h5></div>
-                    <p></p>{ReactHtmlParser(this.props.detailedJob.contents)}
+                    <div>{ReactHtmlParser(this.props.detailedJob.contents)}</div>
                     <a href={this.props.detailedJob.refs.landing_page} target="_blank">{this.props.detailedJob.refs.landing_page}</a>
                     <div className="my-5 w-100 d-flex justify-content-center align-items-center">
                         <Link to="/jobmanager" className=' mx-5'><Button className='buttonApp' variant="primary" onClick={() => {
@@ -65,9 +65,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-
-
-// connect takes 2 functions 
-// 1st: for pulling down state
-// 2nd: for updating state
+// connect 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowDetailedJob)

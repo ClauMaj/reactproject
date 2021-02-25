@@ -9,7 +9,6 @@ import Orange from '../assets/images/orange.png'
 import Red from '../assets/images/red.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Modal } from 'react-bootstrap'
-import JobForm from './JobForm'
 import EditJob from './EditJob'
 
 const ManagedJobs = () => {
@@ -29,12 +28,12 @@ const ManagedJobs = () => {
         <>
             <TitleLi key={0}>
                 <div className="row mx-0 mt-4">
-                    <div className="col-5"> <b> Job title &#8645;</b></div>
-                    <div className="col-2"><b>Company &#8645;</b></div>
-                    <div className="col-2"><b>Location &#8645;</b></div>
-                    <div className="col-1"><b>Applied &#8645;</b></div>
-                    <div className="col-1 d-flex align-items-center justify-content-center"><b>Status</b></div>
-                    <div className="col-1 d-flex align-items-center justify-content-center"><b>Edit</b></div>
+                    <div className="col-5 wrapLiText"> <b> Job title &#8645;</b></div>
+                    <div className="col-2 wrapLiText"><b>Company &#8645;</b></div>
+                    <div className="col-2 wrapLiText"><b>Location &#8645;</b></div>
+                    <div className="col-1 wrapLiText"><b>Applied &#8645;</b></div>
+                    <div className="col-1 d-flex align-items-center justify-content-center wrapLiText"><b>Status</b></div>
+                    <div className="col-1 d-flex align-items-center justify-content-center wrapLiText"><b>Edit</b></div>
                 </div>
             </TitleLi>
             {managedJobs.map((job) => {

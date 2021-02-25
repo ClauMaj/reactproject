@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { storeJobSearch, detailedJob } from '../actions/allActions'
+import { storeJobSearch } from '../actions/allActions'
 import { Divider, H1JobsDiv } from './Styles' // import styled-component
 import { Button } from 'react-bootstrap'
 import ShowAllJobs from './ShowAllJobs'
@@ -27,7 +27,7 @@ const JobSearch = () => {
   const [checkMid, setCheckMid] = useState(false);
   let pageNumber = 1;
 
-
+  // API calls
   const handleSearch = (e) => {
     e.preventDefault();
     const getCity = async () => {

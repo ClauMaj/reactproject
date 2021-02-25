@@ -10,7 +10,6 @@ import ManagedJobs from './ManagedJobs'
 
 const JobManager = () => {
     // getting global state
-    const jobsInState = useSelector(state => state.searchedJobs.results)
     const showAddForm = useSelector(state => state.startAddJobForm)
 
     // receive dispatch functions

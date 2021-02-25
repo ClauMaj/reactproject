@@ -72,7 +72,6 @@ font-weight: 400;
 
 export const TitleLi = styled.li`
 background-color: rgb(26, 120, 163);
-width: 100%;
 font-size: 1.3rem;
 list-style-type: none;
 margin-bottom:15px;
