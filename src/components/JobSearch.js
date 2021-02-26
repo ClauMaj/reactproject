@@ -127,8 +127,9 @@ const JobSearch = () => {
           {(pageCount - currentPage) > 0 ?
             <div>
               <Button className="buttonApp mt-1 mb-5" onClick={(e) => {
-                pageNumber++;
-                handleSearch(e);
+                // pageNumber++;
+                // handleSearch(e);
+                console.log(pageNumber);
               }
               }>Load more jobs</Button>
             </div>
