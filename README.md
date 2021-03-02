@@ -11,7 +11,7 @@
 
 ![Image of JSManager](snippets/jsmanager.png)
 
-- Using real-time data from MapBox and Th and themuse.com/developers/api/v2, users receive a list of available jobs from which they can automatically populate the saved jobs form.
+- Using real-time data from MapBox API and themuse.com/developers/api/v2, users receive a list of available jobs from which they can automatically populate the saved jobs form.
 
 # Technologies and tools used:
 
@@ -28,6 +28,8 @@
 ### Some interesting code and facts:
 
 - The project is divided into 2 main parts - the Search Jobs section and the Saved Jobs Manager board.
+
+- In manipulating the response from the API I needed to use different techniques and JavaScript, including Regex and a React HTML-parser because the main content of the job search API has HTML tags embeded.
 
 - For learning purposes I used a combination of class components and functional components in building the project:
 
@@ -135,7 +137,7 @@ export default ShowAllJobs
     )
 ```
 
-- Saved Jobs lsit items + conditional rendering of details on click
+- Saved Jobs list items + conditional rendering of details on click
 
 ```JSX
 <JobLi key={job.id} onClick={() => {
