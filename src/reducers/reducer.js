@@ -7,11 +7,16 @@ const reducer = (state, action) => {
     switch (action.type) {
         case "STOREJOBSEARCH":
             let tempResults = state.searchedJobs.results;
+            let setNewDetailedJob = state.detailedJob;
+            if (action.data.results.length > 0) {
+                setNewDetailedJob = action.data.results[0];
+            }
             return {
                 ...state,
                 searchedJobs: { ...action.data, results: [...tempResults, ...action.data.results] },
 
                 remainingPages: action.data.page_count - action.data.page,
+                detailedJob: setNewDetailedJob,
             }
         case "DETAILEDJOB":
             let oneJob = state.searchedJobs.results.filter((job) => {
@@ -59,10 +64,6 @@ const reducer = (state, action) => {
                 savedJobs: deleteJob
             }
         case "SETJOBTOEDIT":
-            // let setJobToEdit = state.savedJobs.filter((job) => {
-            //     return job.id === action.data.id;
-            // });
-            // console.log(setJobToEdit);
             return {
                 ...state,
                 setJobToEdit: { ...action.data },

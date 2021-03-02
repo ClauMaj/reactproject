@@ -39,7 +39,7 @@ const loadFromLocalStorage = () => {
     return {
       searchedJobs: { results: [] },
       remainingPages: 0,
-      detailedJob: undefined,
+      detailedJob: {},
       startAddJobForm: false,
       tempJobForm: {
         jobTitle: "",
@@ -72,7 +72,7 @@ const loadFromLocalStorage = () => {
     return {
       searchedJobs: { results: [] },
       remainingPages: 0,
-      detailedJob: undefined,
+      detailedJob: null,
       startAddJobForm: false,
       savedJobs: JSON.parse(serializeState).savedJobs, // JS object
       tempJobForm: {

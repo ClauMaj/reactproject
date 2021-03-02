@@ -1,7 +1,6 @@
 
 // an action creator, return an object with TYPE and data
 export const storeJobSearch = (data) => {
-    console.log(data);
     return {
         type: "STOREJOBSEARCH",
         data: data

@@ -15,6 +15,7 @@ const JobSearch = () => {
   const nrOfJobs = useSelector(state => state.searchedJobs.total)
   const pageCount = useSelector(state => state.searchedJobs.page_count)
   const currentPage = useSelector(state => state.searchedJobs.page)
+
   console.log(jobsInState);
 
   // receive dispatch functions
@@ -43,20 +44,19 @@ const JobSearch = () => {
     const getJobs = async (searchForCity, pickedCountry, checkEntry, checkMid) => {
       let jobsUrl = "";
       if ((checkEntry === true) && (checkMid === false)) {
-        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Entry%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=${pageNumber}`;
+        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Entry%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=${pageNumber}&api_key=${process.env.REACT_APP_THEMUSE}`;
       }
       else if ((checkEntry === false) && (checkMid === true)) {
-        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Mid%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=${pageNumber}`;
+        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Mid%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=${pageNumber}&api_key=${process.env.REACT_APP_THEMUSE}`;
       }
       else {
-        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Entry%20Level&level=Mid%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=${pageNumber}`;
+        jobsUrl = `https://www.themuse.com/api/public/jobs?category=Data%20Science&category=Engineering&level=Entry%20Level&level=Mid%20Level&location=${searchForCity}%2C%20${pickedCountry}&location=Flexible%20%2F%20Remote&page=${pageNumber}&api_key=${process.env.REACT_APP_THEMUSE}`;
       }
-      console.log(jobsUrl);
+
       const reponse = await fetch(jobsUrl);
       const jobsAPIData = await reponse.json();
       console.log(jobsAPIData);
       dispatch(storeJobSearch(jobsAPIData))
-      dispatch(detailedJob(jobsAPIData.results[0].id))
     };
 
   }
@@ -111,6 +111,7 @@ const JobSearch = () => {
               {/* end checkboxes section */}
               <Button type='submit' className='buttonApp' variant="primary" size="lg">Search</Button>
             </form>
+            <p>Because of API limitations(free version) you can only search for Atlanta GA!</p>
           </div>
         </div>
       </div>
@@ -147,7 +148,7 @@ const JobSearch = () => {
 
         <div className="col-5  oneJobDetails" >
 
-          {(stateDetailedJob === undefined) ? "" : <ShowDetailedJob />}
+          {(stateDetailedJob === null) ? "" : <ShowDetailedJob />}
 
         </div>
         {/* end oneJob col */}
