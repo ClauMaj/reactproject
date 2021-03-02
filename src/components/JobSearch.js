@@ -111,7 +111,7 @@ const JobSearch = () => {
               {/* end checkboxes section */}
               <Button type='submit' className='buttonApp' variant="primary" size="lg">Search</Button>
             </form>
-            <p>Because of API limitations(free version) you can only search for Atlanta GA!</p>
+            <p>*Because of API limitations(free version), at the moment you can only search for jobs in Atlanta GA!</p>
           </div>
         </div>
       </div>
