@@ -1,70 +1,179 @@
-# Getting Started with Create React App
+# Job Search Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Check live website here => https://jobsearchmanager.netlify.app/
 
-## Available Scripts
+## What it is
 
-In the project directory, you can run:
+- Job Search Manager is a solo project where I built an app that allows the user to pull available jobs from an API and automaticaly store the data in the job applications management tool or manually enter jobs that they applied for.
 
-### `npm start`
+- The main purpose of the project was a practical approach in learning React, JSX and using the Redux state management library.
+- The data from the My Jobs section is stored in the browser's local storage and loaded into the application's global state when the page refreshes or loads.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Image of JSManager](snippets/jsmanager.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Using real-time data from MapBox and Th and themuse.com/developers/api/v2, users receive a list of available jobs from which they can automatically populate the saved jobs form.
 
-### `npm test`
+# Technologies and tools used:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React
+- Redux
+- JSX
+- JavaScript
+- CSS
+- React-Bootstrap
+- REST API/AJAX
+- Styled-Components
+- The project is deployed on Netlify, via GitHub
 
-### `npm run build`
+### Some interesting code and facts:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The project is divided into 2 main parts - the Search Jobs section and the Saved Jobs Manager board.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- For learning purposes I used a combination of class components and functional components in building the project:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Class based component:
 
-### `npm run eject`
+```JSX
+class ShowDetailedJob extends Component {
+    render() {
+        return (
+            <>
+                <div >
+                    <h3 className="pt-4 h3Details" >{this.props.detailedJob.name}</h3>
+                    <div className="mt-3 w-100 d-flex justify-content-between flex-row"><h4>@{this.props.detailedJob.company.name} </h4><h4>level: {this.props.detailedJob.levels.map((el) => {
+                        return el.short_name
+                    }).join('/')}</h4> </div>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+                    <div className="mb-2 w-100 d-flex justify-content-between flex-row"><h5>{this.props.detailedJob.locations.map((el) => {
+                        return el.name
+                    }).join('/')}</h5> <h5 className="h6Date"> {this.props.detailedJob.publication_date.slice(0, 10)}</h5></div>
+                    <div className="my-4 w-100 d-flex justify-content-center align-items-center">
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+            </>
+        )
+    }
+}
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```javascript
+// map global state to a prop
+// counter is our props: this.state.props
+const mapStateToProps = (state) => {
+  return {
+    detailedJob: state.detailedJob,
+  };
+};
+// update functions for state
+// increment is a prop: this.props.increment(n)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setDetailedToTemp: (n) => dispatch(tempJobForm(n)), // callback accepts param and passes it to dispatch
+    toggleForm: () => dispatch(startAddJobForm()),
+  };
+};
 
-## Learn More
+// connect
+export default connect(mapStateToProps, mapDispatchToProps)(ShowDetailedJob);
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Functional component:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```JSX
+const ShowAllJobs = ({ jobsInState }) => {
+    // receive dispatch functions
+    const dispatch = useDispatch()
+    return (
+        <>
+            {jobsInState.map((job) => {
+                return (<li key={job.id} className="pt-3 px-2 jobsLi" >
+                    <h5 id={job.id} className="h5Li" onClick={(e) => {
+                        dispatch(detailedJob(e.target.id));
+                    }}>{job.name}</h5>
 
-### Code Splitting
+                    <div className=" w-100 d-flex justify-content-between flex-row"><h6>@{job.company.name} </h6><h6>level: {job.levels.map((el) => {
+                        return el.short_name
+                    }).join('/')}</h6> </div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+                    <div className="mb-2 w-100 d-flex justify-content-between flex-row"><h6>{job.locations.map((el) => {
+                        return el.name
+                    }).join('/')}</h6> <h6 className="h6Date"> {job.publication_date.slice(0, 10)}</h6></div>
+                    <p> {job.contents.replace(/<[^>]*>?/gm, '').slice(0, 100)}...</p>
+                </li>)
+            }
+            )}
 
-### Analyzing the Bundle Size
+        </>
+    )
+}
+export default ShowAllJobs
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- The user is able to save , edit and delete Saved Jobs entries and have them persist after session ends, through localStorage.
 
-### Making a Progressive Web App
+```JSX
+ return (
+        <>
+            {showAddForm
+                ?
+                (<div className="row px-0 mx-0 mt-4">
+                    <div className="col-8 offset-2">
+                        <JobForm />
+                    </div>
+                </div>)
+                :
+                (<div className="row px-0 mx-0 mt-4">
+                    <div className="col-6 offset-3">
+                        <Button style={{ backgroundColor: "#414153", color: "#ff6347", border: "none" }} size="lg" block onClick={() => {
+                            dispatch(startAddJobForm())
+                        }
+                        }>Add job</Button>
+                    </div>
+                </div>)}
+            {/* end show button/form ternary */}
+        </>
+    )
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Saved Jobs lsit items + conditional rendering of details on click
 
-### Advanced Configuration
+```JSX
+<JobLi key={job.id} onClick={() => {
+                    dispatch(showDetails(job.id))
+                }
+                }>
+                    <div className="row mx-0">
+                        <div className="col-5 ">{job.jobTitle}</div>
+                        <div className="col-2">{job.company}</div>
+                        <div className="col-2">{job.location}</div>
+                        <div className="col-1">{Math.round(Math.abs((jobDate - currentDate) / oneDay))} days ago</div>
+                        <div className="col-1 d-flex align-items-center justify-content-center"><img className="statusImage" src={status} alt="" /></div>
+                        <div className="showBtn col-1 d-flex align-items-center justify-content-end">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+                            <Button className="deleteEdit" onClick={() => {
+                                dispatch(setJobToEdit(job.id));
+                                setModalShow(true);
+                            }}>
+                                <FontAwesomeIcon icon={["fas", "edit"]} color="orange" />
+                            </Button>
+                            <Button className="deleteEdit" onClick={() => {
+                                dispatch(deleteSavedJob(job.id))
+                            }
+                            }>
+                                <FontAwesomeIcon icon={["fas", "trash"]} color="darkred" />
+                            </Button>
+                        </div>
+                    </div>
+                    {job.showDetails ?
+                        <div className="row mx-0">
+                            <div className="col">
+                                <div className="mt-3"><b>Original link </b> - <a href={job.link} target="_blank">{job.link}</a>
+                                </div>
+                                <div><b>Notes: </b>  <p>{job.notes}</p>
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        ""}
+                </JobLi>)
+```
