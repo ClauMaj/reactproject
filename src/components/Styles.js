@@ -91,3 +91,7 @@ li {
   }
 
 `;
+
+export const FootDiv = styled.div`
+
+`;

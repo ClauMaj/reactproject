@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { storeJobSearch } from '../actions/allActions'
+import { storeJobSearch, detailedJob } from '../actions/allActions'
 import { Divider, H1JobsDiv } from './Styles' // import styled-component
 import { Button } from 'react-bootstrap'
 import ShowAllJobs from './ShowAllJobs'
@@ -56,6 +56,7 @@ const JobSearch = () => {
       const jobsAPIData = await reponse.json();
       console.log(jobsAPIData);
       dispatch(storeJobSearch(jobsAPIData))
+      dispatch(detailedJob(jobsAPIData.results[0].id))
     };
 
   }

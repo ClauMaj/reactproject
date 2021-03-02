@@ -137,8 +137,11 @@ ul.jobsUl li:last-child {
 }
 
 .h5Li {
-  cursor: pointer;
   color: #ff4e2e;
+}
+.h5Li:hover {
+  cursor: pointer;
+  color: #d14026;
 }
 .h3Details {
   color: #ff4e2e;
