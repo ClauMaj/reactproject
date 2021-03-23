@@ -24,7 +24,7 @@ const saveToLocalStorage = (reduxGlobalState) => {
   let saveState = { savedJobs: [...reduxGlobalState.savedJobs] }
   try {
     const serializeState = JSON.stringify(saveState);
-    localStorage.setItem('state', serializeState)
+    localStorage.setItem('jobsState', serializeState)
   }
   catch (e) {
     console.log(e);
@@ -34,12 +34,12 @@ const saveToLocalStorage = (reduxGlobalState) => {
 
 // load data from local storage (return => if it exist => read and parse | if doesn't exist set initial value of store)
 const loadFromLocalStorage = () => {
-  const serializeState = localStorage.getItem('state');
+  const serializeState = localStorage.getItem('jobsState');
   if (serializeState === null) {
     return {
       searchedJobs: { results: [] },
       remainingPages: 0,
-      detailedJob: {},
+      detailedJob: null,
       startAddJobForm: false,
       tempJobForm: {
         jobTitle: "",
@@ -74,7 +74,7 @@ const loadFromLocalStorage = () => {
       remainingPages: 0,
       detailedJob: null,
       startAddJobForm: false,
-      savedJobs: JSON.parse(serializeState).savedJobs, // JS object
+      savedJobs: JSON.parse(serializeState).savedJobs || [], // JS object
       tempJobForm: {
         jobTitle: "",
         company: "",
