@@ -8,7 +8,10 @@ export const DivSC = styled.div`
     height: 400px;
 `;
 
-export const H1S = styled.h1`
+export const H1S = styled.div`
+color:#8f3120;
+font-size: 4vh;
+font-family: 'Chango', cursive;
     background-color: lightgray;
     text-align: center;
     width: 100%;
@@ -23,7 +26,8 @@ export const H1S = styled.h1`
 
 `;
 
-export const HomeH1 = styled.h1`
+export const HomeH1 = styled.div`
+    font-size: 3vh;
     height: 20vh;
     text-align: center;
     display: flex;

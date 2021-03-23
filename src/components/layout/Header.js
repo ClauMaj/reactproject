@@ -21,7 +21,7 @@ const Header = (props) => {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <H1S><img className="bigLogo" src={BigLogo} alt="" /></H1S>
+            <H1S>Job Search<br /> Manager</H1S>
         </>
     );
 };

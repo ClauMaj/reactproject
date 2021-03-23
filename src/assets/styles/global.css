@@ -34,7 +34,7 @@ body {
 .buttonApp:hover {
   background-color: rgb(7, 77, 109);
   box-shadow: 5px 5px 10px rgb(117, 117, 117);
-  color: #ff6347;
+  color: #ff6347 #8f3120;
   border: none;
   font-weight: bold;
 }
