@@ -169,9 +169,7 @@ const JobSearch = () => {
 
         <div className="col-4 px-0 offset-1 jobsContainer">
           {(jobsInState.length > 0) ? <p className="totalP my-0 pl-4"><b>Found {nrOfJobs} jobs</b></p> : ''}
-          {/* <ul className={showLoader ? "px-0 my-0  jobsUl spinnerClass" : "px-0 my-0  jobsUl"}>
-            {(jobsInState.length > 0) ? <ShowAllJobs jobsInState={jobsInState} /> : null ? null : <FadeLoader className="" color={"blue"} loading={showLoader} size={100} />}
-          </ul> */}
+          {/* render search results or loading screen */}
           {showSearchResults()}
           {(pageCount - currentPage) > 0 ?
             <div>
@@ -192,12 +190,8 @@ const JobSearch = () => {
           <Divider></Divider>
         </div>
         {/* end divider col */}
+        {/* render detailed job or loading screen */}
         {showDetailedJobOrLoader()}
-        {/* <div className={showLoader ? "col-5  oneJobDetails spinnerClass" : "col-5  oneJobDetails"} >
-
-          {(stateDetailedJob !== null) ? <ShowDetailedJob /> : null ? null : <FadeLoader className="" color={"blue"} loading={showLoader} size={100} />}
-
-        </div> */}
         {/* end oneJob col */}
 
       </div>
