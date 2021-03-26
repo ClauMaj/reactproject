@@ -7,6 +7,8 @@ import { Button } from 'react-bootstrap'
 import ShowAllJobs from './ShowAllJobs'
 import ShowDetailedJob from './ShowDetailedJob'
 import { countries, us } from '../data/countries'
+// loader 
+import FadeLoader from "react-spinners/ClipLoader";
 
 const JobSearch = () => {
   // getting global state
@@ -26,11 +28,13 @@ const JobSearch = () => {
   const [pickedCountry, setPickedCountry] = useState('GA');
   const [checkEntry, setCheckEntry] = useState(false);
   const [checkMid, setCheckMid] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
   let pageNumber = 1;
 
   // API calls
   const handleSearch = (e) => {
     e.preventDefault();
+    setShowLoader(true);
     const getCity = async () => {
       let cityUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${pickedCity} ${pickedCountry}.json?access_token=${process.env.REACT_APP_MAPTOKEN}`;
       const reponse = await fetch(cityUrl);
@@ -57,6 +61,10 @@ const JobSearch = () => {
       const jobsAPIData = await reponse.json();
       console.log(jobsAPIData);
       dispatch(storeJobSearch(jobsAPIData))
+      // show at least 1 sec of spinner
+      setTimeout(() => {
+        setShowLoader(false);
+      }, 1000)
     };
 
   }
@@ -69,6 +77,44 @@ const JobSearch = () => {
   let allCountries = countries.map((el) => {
     return <option key={el} value={el}>{el}</option>
   })
+
+  // show loading or show the searched jobs results
+  const showSearchResults = () => {
+    if (showLoader === true) {
+      return (
+        <ul className="px-0 my-0  jobsUl spinnerClass">
+          <FadeLoader className="" color={"blue"} loading={showLoader} size={100} />
+
+        </ul>
+      )
+    }
+    else {
+      return (
+        <ul className="px-0 my-0  jobsUl">
+          {(jobsInState.length > 0) ? <ShowAllJobs jobsInState={jobsInState} /> : null}
+        </ul>
+      )
+    }
+  }
+
+  // show loading or show the detailed job
+  const showDetailedJobOrLoader = () => {
+    if (showLoader === true) {
+      return (
+        <div className="col-5  oneJobDetails spinnerClass">
+          <FadeLoader className="" color={"blue"} loading={showLoader} size={100} />
+
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="col-5  oneJobDetails">
+          {(stateDetailedJob !== null) ? <ShowDetailedJob /> : null}
+        </div>
+      )
+    }
+  }
 
   return (
     <>
@@ -123,9 +169,10 @@ const JobSearch = () => {
 
         <div className="col-4 px-0 offset-1 jobsContainer">
           {(jobsInState.length > 0) ? <p className="totalP my-0 pl-4"><b>Found {nrOfJobs} jobs</b></p> : ''}
-          <ul className="px-0 my-0  jobsUl">
-            {(jobsInState.length > 0) ? <ShowAllJobs jobsInState={jobsInState} /> : ""}
-          </ul>
+          {/* <ul className={showLoader ? "px-0 my-0  jobsUl spinnerClass" : "px-0 my-0  jobsUl"}>
+            {(jobsInState.length > 0) ? <ShowAllJobs jobsInState={jobsInState} /> : null ? null : <FadeLoader className="" color={"blue"} loading={showLoader} size={100} />}
+          </ul> */}
+          {showSearchResults()}
           {(pageCount - currentPage) > 0 ?
             <div>
               <Button className="buttonApp mt-1 mb-5" onClick={(e) => {
@@ -145,12 +192,12 @@ const JobSearch = () => {
           <Divider></Divider>
         </div>
         {/* end divider col */}
+        {showDetailedJobOrLoader()}
+        {/* <div className={showLoader ? "col-5  oneJobDetails spinnerClass" : "col-5  oneJobDetails"} >
 
-        <div className="col-5  oneJobDetails" >
+          {(stateDetailedJob !== null) ? <ShowDetailedJob /> : null ? null : <FadeLoader className="" color={"blue"} loading={showLoader} size={100} />}
 
-          {(stateDetailedJob === null) ? "" : <ShowDetailedJob />}
-
-        </div>
+        </div> */}
         {/* end oneJob col */}
 
       </div>
