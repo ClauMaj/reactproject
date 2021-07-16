@@ -72,10 +72,10 @@ const JobSearch = () => {
 
   // make options in the dropdown for all countries and US states
   let usStates = us.map((el) => {
-    return <option key={el.abbreviation} value={el.abbreviation}>US, {el.name}</option>
+    return <option key={el.abbreviation} value={`US, ${el.name}`}> </option>
   })
   let allCountries = countries.map((el) => {
-    return <option key={el} value={el}>{el}</option>
+    return <option key={el} value={el} />
   })
 
   // show loading or show the searched jobs results
