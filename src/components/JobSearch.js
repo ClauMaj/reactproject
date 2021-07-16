@@ -23,7 +23,7 @@ const JobSearch = () => {
   // receive dispatch functions
   const dispatch = useDispatch()
 
-  // set form input to local storage
+  // set form input to local state
   const [pickedCity, setPickedCity] = useState('Atlanta');
   const [pickedCountry, setPickedCountry] = useState('GA');
   const [checkEntry, setCheckEntry] = useState(false);
@@ -132,10 +132,11 @@ const JobSearch = () => {
               {/* end input field */}
               <div className="form-group-select">
                 <label>Country/State</label>
-                <select className="form-select form-select-lg" onChange={(e) => { setPickedCountry(e.target.value) }}>
+                <input list="datacountry" className="form-select form-select-lg" />
+                <datalist id="datacountry" className="form-select form-select-lg" onChange={(e) => { setPickedCountry(e.target.value) }}>
                   <option value="" >-----------------</option>
                   {usStates}{allCountries}
-                </select>
+                </datalist>
               </div>
               {/* end select field */}
 
@@ -145,19 +146,19 @@ const JobSearch = () => {
                   <input className="form-check-input" type="checkbox" onChange={(e) => { setCheckEntry(e.target.checked) }} />
                   <label className="form-check-label" htmlFor="flexCheckDefault">
                     Entry
-  </label>
+                  </label>
                 </div>
                 <div className="form-check">
                   <input className="form-check-input" type="checkbox" onChange={(e) => { setCheckMid(e.target.checked) }} />
                   <label className="form-check-label" htmlFor="flexCheckChecked">
                     Mid
-  </label>
+                  </label>
                 </div>
               </div>
               {/* end checkboxes section */}
               <Button type='submit' className='buttonApp' variant="primary" size="lg">Search</Button>
             </form>
-            <p>*Because of API limitations(free version), at the moment you can only search for jobs in Atlanta GA!</p>
+            {/* <p>*Because of API limitations(free version), at the moment you can only search for jobs in Atlanta GA!</p> */}
           </div>
         </div>
       </div>
